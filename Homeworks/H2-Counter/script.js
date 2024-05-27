@@ -12,6 +12,22 @@
 
 // ##########################################
 // Write your code here
+const outputDisplay = document.getElementById('display');
+let valuee = 0;
 
-
-
+document.getElementById('minus').addEventListener('click', function(){
+    if(valuee >= 1){
+        valuee = valuee-1;
+        outputDisplay.value = valuee;
+    }
+})
+document.getElementById('plus').addEventListener('click', function(){
+    if(valuee <= 99){
+        valuee = valuee+1;
+        outputDisplay.value = valuee;
+    }
+})
+document.getElementById('resett').addEventListener('click', function(){
+    valuee = 0;
+    outputDisplay.value = valuee;
+})
