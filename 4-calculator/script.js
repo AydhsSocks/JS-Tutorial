@@ -2,20 +2,25 @@ const outputDisplay = document.getElementById('output-value');
 const historyDisplay = document.getElementById('history-value');
 const numberButtons = document.getElementsByClassName('number');
 const operatorButtons = document.getElementsByClassName('operator');
+<<<<<<< HEAD
 let CurrentOperator = '';
+=======
+const clearButton = document.getElementById('clear');
+const backspaceButton = document.getElementById('backspace');
+const equalsButton = document.getElementById('=');
+>>>>>>> f9f275f4ba65497cbd2a50686dd6f90d6e448c2a
 
-let value = '';
-let history = '';
-let operator = '';
+let currentValue = '';
+let previousValue = '';
+let currentOperator = '';
 
 function appendNumber(number) {
-    if (value == '0') {
-        value = number;
-    } else if (value.length <= 16) {
-        value += number;
+    if (currentValue === '0') {
+        currentValue = number;
+    } else if (currentValue.length <= 16) {
+        currentValue += number;
     }
-
-    outputDisplay.innerHTML = value;
+    outputDisplay.innerHTML = currentValue;
 }
 
 for (let btn of numberButtons) {
@@ -24,17 +29,58 @@ for (let btn of numberButtons) {
     });
 }
 
+<<<<<<< HEAD
 document.getElementById('clear').addEventListener('click', function () {
     value = '';
     history = '';
     outputDisplay.innerHTML = '';
     historyDisplay.innerText = '';
     CurrentOperator = '';
+=======
+clearButton.addEventListener('click', () => {
+    outputDisplay.innerHTML = '';
+    currentValue = '';
+    previousValue = '';
+    currentOperator = '';
+    historyDisplay.innerHTML = '';
+>>>>>>> f9f275f4ba65497cbd2a50686dd6f90d6e448c2a
 });
 
-document.getElementById('backspace').addEventListener('click', function () {
-    value = value.slice(0, -1);
-    outputDisplay.innerHTML = value;
+backspaceButton.addEventListener('click', function () {
+    currentValue = currentValue.slice(0, -1);
+    outputDisplay.innerHTML = currentValue;
+});
+
+function calculate(number1, number2, operator) {
+    if (operator == '+') {
+        return number1 + number2;
+    }
+    if (operator == '-') {
+        return number1 - number2;
+    }
+    if (operator == '×') {
+        return number1 * number2;
+    }
+    if (operator == '÷') {
+        return number1 / number2;
+    }
+}
+
+for (let btn of operatorButtons) {
+    btn.addEventListener('click', function () {
+        previousValue = currentValue;
+        currentValue = '0';
+        outputDisplay.innerHTML = currentValue;
+        historyDisplay.innerHTML = previousValue;
+        currentOperator = btn.innerHTML;
+    });
+}
+
+document.getElementById('=').addEventListener('click', function () {
+    currentValue = calculate(Number(previousValue), Number(currentValue), currentOperator);
+    previousValue = '';
+    outputDisplay.innerHTML = currentValue;
+    historyDisplay.innerHTML = previousValue;
 });
 
 function calculator(num1, num2, operator) {
