@@ -46,7 +46,7 @@ clearButton.addEventListener('click', () => {
 >>>>>>> f9f275f4ba65497cbd2a50686dd6f90d6e448c2a
 });
 
-backspaceButton.addEventListener('click', function () {
+backspaceButton.addEventListener('click', () => {
     currentValue = currentValue.slice(0, -1);
     outputDisplay.innerHTML = currentValue;
 });
@@ -77,7 +77,11 @@ for (let btn of operatorButtons) {
 }
 
 document.getElementById('=').addEventListener('click', function () {
-    currentValue = calculate(Number(previousValue), Number(currentValue), currentOperator);
+    currentValue = calculate(
+        Number(previousValue),
+        Number(currentValue),
+        currentOperator
+    );
     previousValue = '';
     outputDisplay.innerHTML = currentValue;
     historyDisplay.innerHTML = previousValue;
